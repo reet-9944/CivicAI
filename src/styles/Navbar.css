@@ -1,0 +1,222 @@
+.navbar-wrapper {
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  width: 100%;
+  background: rgba(245, 240, 235, 0.88);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.7);
+  box-shadow: 0 2px 20px rgba(37, 99, 235, 0.08);
+}
+
+.nav-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-top: 0.9rem;
+  padding-bottom: 0.9rem;
+  gap: 1rem;
+}
+
+/* ── Logo — stays on the left ── */
+.nav-logo {
+  display: flex;
+  align-items: center;
+  gap: 0.55rem;
+  font-size: 1.4rem;
+  font-weight: 800;
+  text-decoration: none;
+  letter-spacing: -0.03em;
+  flex-shrink: 0;
+  margin-right: auto; /* pushes nav links + translate to the far right */
+}
+
+.logo-icon {
+  font-size: 1.6rem;
+  color: var(--primary);
+}
+
+.logo-text-civic { color: var(--text-primary); }
+.logo-text-ai    { color: var(--primary); }
+
+/* ── Desktop links — grouped on the right ── */
+.nav-links {
+  display: flex;
+  gap: 0.4rem;
+  list-style: none;
+  align-items: center;
+  flex-shrink: 0;
+}
+
+
+.nav-link {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-weight: 500;
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+  transition: all var(--transition-fast);
+  padding: 0.5rem 0.9rem;
+  border-radius: var(--border-radius-sm);
+  border: 1px solid transparent;
+  white-space: nowrap;
+}
+
+.nav-link:hover {
+  color: var(--primary);
+  background: rgba(37, 99, 235, 0.07);
+  border-color: rgba(37, 99, 235, 0.12);
+}
+
+.nav-link.active {
+  color: var(--primary);
+  background: rgba(37, 99, 235, 0.1);
+  border-color: rgba(37, 99, 235, 0.2);
+  font-weight: 600;
+}
+
+/* ── Ask AI pill button ── */
+.btn-assistant {
+  background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%) !important;
+  color: #fff !important;
+  padding: 0.55rem 1.25rem;
+  border-radius: var(--border-radius-xl) !important;
+  border: none !important;
+  box-shadow: 0 4px 14px rgba(37, 99, 235, 0.3);
+  font-weight: 700;
+}
+
+.btn-assistant:hover,
+.btn-assistant.active {
+  background: linear-gradient(135deg, var(--primary-hover) 0%, var(--primary) 100%) !important;
+  color: #fff !important;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(37, 99, 235, 0.4) !important;
+}
+
+/* ── Hamburger ── */
+.nav-hamburger {
+  display: none;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 5px;
+  width: 40px;
+  height: 40px;
+  background: rgba(255,255,255,0.8);
+  border: 1px solid rgba(37,99,235,0.15);
+  border-radius: var(--border-radius-sm);
+  cursor: pointer;
+  padding: 0;
+  transition: all var(--transition-fast);
+  flex-shrink: 0;
+}
+
+.nav-hamburger:hover {
+  background: #fff;
+  border-color: rgba(37,99,235,0.3);
+}
+
+.hamburger-line {
+  display: block;
+  width: 20px;
+  height: 2px;
+  background: var(--text-primary);
+  border-radius: 2px;
+  transition: all var(--transition-fast);
+}
+
+.nav-hamburger[aria-expanded="true"] .hamburger-line:nth-child(1) {
+  transform: translateY(7px) rotate(45deg);
+}
+.nav-hamburger[aria-expanded="true"] .hamburger-line:nth-child(2) {
+  opacity: 0; transform: scaleX(0);
+}
+.nav-hamburger[aria-expanded="true"] .hamburger-line:nth-child(3) {
+  transform: translateY(-7px) rotate(-45deg);
+}
+
+/* ── Mobile menu ── */
+.nav-mobile-menu {
+  display: none;
+  flex-direction: column;
+  gap: 0.25rem;
+  padding: 1rem var(--container-padding);
+  border-top: 1px solid rgba(37,99,235,0.1);
+  background: rgba(245, 240, 235, 0.97);
+  backdrop-filter: blur(20px);
+}
+
+.nav-mobile-menu.open { display: flex; }
+
+.nav-mobile-menu .nav-link {
+  padding: 0.75rem 1rem;
+  font-size: 1rem;
+  border-radius: var(--border-radius-sm);
+  width: 100%;
+}
+
+.nav-mobile-menu .btn-assistant {
+  margin-top: 0.5rem;
+  justify-content: center;
+  border-radius: var(--border-radius-sm) !important;
+}
+
+/* ── Responsive ── */
+@media (max-width: 768px) {
+  .nav-links     { display: none; }
+  .nav-hamburger { display: flex; }
+}
+
+@media (max-width: 480px) {
+  .nav-logo  { font-size: 1.2rem; }
+  .logo-icon { font-size: 1.4rem; }
+}
+
+/* ── Google Translate widget ── */
+.nav-translate {
+  flex-shrink: 0;
+}
+
+/* Override Google Translate default styles to match our theme */
+.nav-translate .goog-te-gadget {
+  font-family: inherit !important;
+  font-size: 0 !important; /* hide "Powered by Google" text */
+}
+
+.nav-translate .goog-te-gadget-simple {
+  background: rgba(255,255,255,0.8) !important;
+  border: 1px solid rgba(37,99,235,0.2) !important;
+  border-radius: 8px !important;
+  padding: 4px 10px !important;
+  font-size: 0.8rem !important;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.nav-translate .goog-te-gadget-simple:hover {
+  background: #fff !important;
+  border-color: rgba(37,99,235,0.4) !important;
+}
+
+.nav-translate .goog-te-gadget-simple span {
+  color: var(--text-secondary) !important;
+  font-size: 0.8rem !important;
+}
+
+.nav-translate .goog-te-gadget-simple .goog-te-menu-value span {
+  color: var(--primary) !important;
+  font-weight: 600 !important;
+}
+
+/* Hide the Google branding bar that appears at top of page */
+.goog-te-banner-frame { display: none !important; }
+body { top: 0 !important; }
+
+@media (max-width: 768px) {
+  .nav-translate {
+    display: none;
+  }
+}
