@@ -1,4 +1,4 @@
-import { useState, useCallback } from 'react';
+import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import {
   FaIdCard, FaMapMarkerAlt, FaVoteYea, FaBoxOpen,
@@ -90,17 +90,17 @@ const Timeline = () => {
   const [activeId, setActiveId] = useState(null);
   const [checked, setChecked] = useState({});
 
-  const toggle = useCallback((id) => setActiveId(prev => prev === id ? null : id), []);
+  const toggle = (id) => setActiveId(prev => prev === id ? null : id);
 
-  const toggleCheck = useCallback((stepId, idx) => {
+  const toggleCheck = (stepId, idx) => {
     const key = `${stepId}-${idx}`;
     setChecked(prev => ({ ...prev, [key]: !prev[key] }));
-  }, []);
+  };
 
-  const getProgress = useCallback((stepId, total) => {
+  const getProgress = (stepId, total) => {
     const done = Array.from({ length: total }, (_, i) => checked[`${stepId}-${i}`]).filter(Boolean).length;
     return Math.round((done / total) * 100);
-  }, [checked]);
+  };
 
   return (
     <main className="timeline-page container animate-fade-in" id="main-content">

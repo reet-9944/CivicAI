@@ -1,4 +1,4 @@
-import { useState, useCallback } from 'react';
+import { useState } from 'react';
 import PropTypes from 'prop-types';
 import { motion, AnimatePresence } from 'framer-motion';
 import {
@@ -166,14 +166,14 @@ const Resources = () => {
 
   const active = guides.find(g => g.id === activeId);
 
-  const toggleCheck = useCallback((guideId, idx) => {
+  const toggleCheck = (guideId, idx) => {
     const key = `${guideId}-${idx}`;
     setChecked(prev => ({ ...prev, [key]: !prev[key] }));
-  }, []);
+  };
 
-  const getDone = useCallback((guideId, total) => {
+  const getDone = (guideId, total) => {
     return Array.from({ length: total }, (_, i) => checked[`${guideId}-${i}`]).filter(Boolean).length;
-  }, [checked]);
+  };
 
   return (
     <main className="resources-page container" id="main-content">
