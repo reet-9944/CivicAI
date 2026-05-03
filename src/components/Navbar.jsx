@@ -20,6 +20,30 @@ const Navbar = () => {
     return () => window.removeEventListener('resize', handleResize);
   }, []);
 
+  // Initialize Google Translate
+  useEffect(() => {
+    // Only add if it doesn't already exist to prevent duplicates during HMR
+    if (!document.getElementById('google-translate-script')) {
+      window.googleTranslateElementInit = () => {
+        new window.google.translate.TranslateElement(
+          {
+            pageLanguage: 'en',
+            includedLanguages: 'es,fr,de,zh-CN,hi,ar,pt,ja,ko,ru',
+            layout: window.google.translate.TranslateElement.InlineLayout.SIMPLE,
+            autoDisplay: false,
+          },
+          'google_translate_element'
+        );
+      };
+
+      const script = document.createElement('script');
+      script.id = 'google-translate-script';
+      script.src = 'https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit';
+      script.async = true;
+      document.body.appendChild(script);
+    }
+  }, []);
+
   const closeMenu = () => setMenuOpen(false);
 
   return (
