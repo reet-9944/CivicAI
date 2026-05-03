@@ -1,52 +1,146 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef, useCallback } from 'react';
 import { NavLink, Link } from 'react-router-dom';
-import { motion } from 'framer-motion';
-import { FaVoteYea, FaRobot, FaStream, FaHome, FaBookOpen } from 'react-icons/fa';
+import { motion, AnimatePresence } from 'framer-motion';
+import {
+  FaVoteYea, FaRobot, FaStream, FaHome, FaBookOpen,
+  FaGlobe, FaChevronDown, FaCheck,
+} from 'react-icons/fa';
 import '../styles/Navbar.css';
 
+/* ── Language data ─────────────────────────────────────────── */
+const LANGUAGES = [
+  { code: '/auto/en', label: 'English', flag: '🇺🇸' },
+  { code: '/auto/es', label: 'Español', flag: '🇪🇸' },
+  { code: '/auto/fr', label: 'Français', flag: '🇫🇷' },
+  { code: '/auto/de', label: 'Deutsch', flag: '🇩🇪' },
+  { code: '/auto/hi', label: 'हिन्दी', flag: '🇮🇳' },
+  { code: '/auto/zh-CN', label: '中文', flag: '🇨🇳' },
+  { code: '/auto/ar', label: 'العربية', flag: '🇸🇦' },
+  { code: '/auto/pt', label: 'Português', flag: '🇧🇷' },
+  { code: '/auto/ja', label: '日本語', flag: '🇯🇵' },
+  { code: '/auto/ko', label: '한국어', flag: '🇰🇷' },
+  { code: '/auto/ru', label: 'Русский', flag: '🇷🇺' },
+  { code: '/auto/it', label: 'Italiano', flag: '🇮🇹' },
+];
+
 /**
- * MutationObserver hook — watches the DOM and:
- * 1. Moves the Google Translate widget back into #google_translate_element
- *    if Google tries to relocate it elsewhere in the page.
- * 2. Hides the Google top-bar banner that Google injects into <body>.
- *
- * The actual Google Translate script is loaded in index.html via the
- * official Google Translate Element API:
- * https://translate.google.com/translate_a/element.js
+ * Reads the current language from the Google Translate cookie.
+ * Returns the LANGUAGES entry or the English default.
  */
-function useKeepTranslateInNavbar() {
-  useEffect(() => {
-    const navSlot = document.getElementById('google_translate_element');
-    if (!navSlot) return;
-
-    const fix = () => {
-      // Move widget back to navbar if Google relocated it
-      const widget = document.querySelector('.goog-te-gadget');
-      if (widget && widget.parentElement !== navSlot) {
-        navSlot.appendChild(widget);
-      }
-      // Suppress the Google top-bar
-      const bar = document.querySelector('.goog-te-banner-frame');
-      if (bar) bar.style.display = 'none';
-      if (document.body.style.top && document.body.style.top !== '0px') {
-        document.body.style.top = '0';
-      }
-    };
-
-    const observer = new MutationObserver(fix);
-    observer.observe(document.body, { childList: true, subtree: false });
-
-    // Run once immediately in case widget already rendered
-    fix();
-
-    return () => observer.disconnect();
-  }, []);
+function getCurrentLang() {
+  try {
+    const match = document.cookie.match(/googtrans=([^;]+)/);
+    if (match) {
+      const val = decodeURIComponent(match[1]); // e.g. "/auto/es"
+      const found = LANGUAGES.find(l => l.code === val);
+      if (found) return found;
+    }
+  } catch (_) { /* ignore */ }
+  return LANGUAGES[0];
 }
 
+/**
+ * Sets the Google Translate cookie and reloads the page.
+ * Uses the official googtrans cookie format that Google Translate reads.
+ */
+function applyGoogleTranslate(langCode) {
+  const domain = window.location.hostname;
+  if (langCode === '/auto/en') {
+    // Reset to English — clear the cookie
+    document.cookie = 'googtrans=; path=/; expires=Thu, 01 Jan 1970 00:00:00 UTC;';
+    document.cookie = `googtrans=; path=/; domain=${domain}; expires=Thu, 01 Jan 1970 00:00:00 UTC;`;
+  } else {
+    document.cookie = `googtrans=${langCode}; path=/;`;
+    document.cookie = `googtrans=${langCode}; path=/; domain=${domain};`;
+  }
+  window.location.reload();
+}
+
+/* ── Language Selector component ───────────────────────────── */
+function LangSelector() {
+  const [open, setOpen] = useState(false);
+  const [current, setCurrent] = useState(LANGUAGES[0]);
+  const wrapRef = useRef(null);
+
+  useEffect(() => {
+    setCurrent(getCurrentLang());
+  }, []);
+
+  // Close on outside click
+  useEffect(() => {
+    const handler = (e) => {
+      if (wrapRef.current && !wrapRef.current.contains(e.target)) setOpen(false);
+    };
+    document.addEventListener('mousedown', handler);
+    return () => document.removeEventListener('mousedown', handler);
+  }, []);
+
+  const select = useCallback((lang) => {
+    setCurrent(lang);
+    setOpen(false);
+    applyGoogleTranslate(lang.code);
+  }, []);
+
+  return (
+    <div className="lang-selector" ref={wrapRef}>
+      {/* Trigger button */}
+      <button
+        className="lang-btn"
+        onClick={() => setOpen(v => !v)}
+        aria-label={`Language: ${current.label}. Click to change`}
+        aria-expanded={open}
+        aria-haspopup="listbox"
+        type="button"
+      >
+        <FaGlobe aria-hidden="true" className="lang-globe-icon" />
+        <span className="lang-btn-text">{current.flag} {current.label}</span>
+        <motion.span
+          animate={{ rotate: open ? 180 : 0 }}
+          transition={{ duration: 0.2 }}
+          style={{ display: 'flex', alignItems: 'center' }}
+        >
+          <FaChevronDown aria-hidden="true" className="lang-chevron-icon" />
+        </motion.span>
+      </button>
+
+      {/* Dropdown */}
+      <AnimatePresence>
+        {open && (
+          <motion.ul
+            className="lang-dropdown"
+            role="listbox"
+            aria-label="Select language"
+            initial={{ opacity: 0, y: -6, scale: 0.97 }}
+            animate={{ opacity: 1, y: 0, scale: 1 }}
+            exit={{ opacity: 0, y: -6, scale: 0.97 }}
+            transition={{ duration: 0.15 }}
+          >
+            {LANGUAGES.map(lang => (
+              <li key={lang.code} role="option" aria-selected={lang.code === current.code}>
+                <button
+                  className={`lang-option${lang.code === current.code ? ' active' : ''}`}
+                  onClick={() => select(lang)}
+                  type="button"
+                  aria-label={`Switch to ${lang.label}`}
+                >
+                  <span className="lang-flag">{lang.flag}</span>
+                  <span className="lang-name">{lang.label}</span>
+                  {lang.code === current.code && (
+                    <FaCheck aria-hidden="true" className="lang-check" />
+                  )}
+                </button>
+              </li>
+            ))}
+          </motion.ul>
+        )}
+      </AnimatePresence>
+    </div>
+  );
+}
+
+/* ── Navbar ─────────────────────────────────────────────────── */
 const Navbar = () => {
   const [menuOpen, setMenuOpen] = useState(false);
-
-  useKeepTranslateInNavbar();
 
   useEffect(() => {
     const onResize = () => { if (window.innerWidth > 768) setMenuOpen(false); };
@@ -108,16 +202,8 @@ const Navbar = () => {
             </li>
           </ul>
 
-          {/*
-            Google Translate widget target.
-            The official Google Translate Element API (loaded in index.html)
-            renders its language selector dropdown inside this div.
-          */}
-          <div
-            id="google_translate_element"
-            className="nav-translate"
-            aria-label="Translate this page using Google Translate"
-          />
+          {/* Language selector — always visible, no CDN dependency */}
+          <LangSelector />
 
           {/* Hamburger (mobile) */}
           <button
@@ -153,8 +239,20 @@ const Navbar = () => {
           <NavLink to="/assistant" className={({ isActive }) => isActive ? 'nav-link btn-assistant active' : 'nav-link btn-assistant'} onClick={closeMenu} aria-label="Ask the AI Assistant">
             <FaRobot aria-hidden="true" /> Ask AI
           </NavLink>
+
+          {/* Language selector in mobile menu */}
+          <div className="mobile-lang-wrap">
+            <LangSelector />
+          </div>
         </div>
       </motion.nav>
+
+      {/*
+        Hidden Google Translate element — required for the googtrans cookie
+        to be picked up by Google's translation service on page reload.
+        The official Google Translate script is loaded in index.html.
+      */}
+      <div id="google_translate_element" style={{ display: 'none' }} aria-hidden="true" />
     </header>
   );
 };
