@@ -11,6 +11,14 @@ const SYSTEM_INSTRUCTION =
   'Do not endorse any candidate or party. If asked about partisan opinions, politely decline and ' +
   'refocus on the educational process.';
 
+/**
+ * Assistant Component.
+ * Provides a conversational AI interface for users to ask questions about the election process.
+ * Uses Google Generative AI to stream non-partisan educational responses.
+ *
+ * @component
+ * @returns {JSX.Element} The rendered Assistant page.
+ */
 const Assistant = () => {
   const [messages, setMessages] = useState([
     {
@@ -77,7 +85,7 @@ const Assistant = () => {
 
       setMessages(prev => [...prev, { role: 'model', content: cleanHTML, isHtml: true }]);
     } catch (err) {
-      console.error(err);
+      // Suppressed for production code quality: console.error(err);
       const errMsg =
         err?.message?.includes('API_KEY_INVALID') || err?.message?.includes('401')
           ? 'Invalid API key. Please check your Gemini API key and try again.'

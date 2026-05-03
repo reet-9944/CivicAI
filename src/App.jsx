@@ -13,6 +13,14 @@ const Assistant = React.lazy(() => import('./pages/Assistant'));
 const Timeline = React.lazy(() => import('./pages/Timeline'));
 const Resources = React.lazy(() => import('./pages/Resources'));
 
+/**
+ * Main application component that handles routing and layout.
+ * Wraps the application in an ErrorBoundary and provides top-level navigation.
+ * Uses React.lazy and Suspense for code splitting.
+ *
+ * @component
+ * @returns {JSX.Element} The rendered application layout and routes.
+ */
 function App() {
   const location = useLocation();
 

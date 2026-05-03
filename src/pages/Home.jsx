@@ -75,6 +75,14 @@ const electionCycleEvents = [
   },
 ];
 
+/**
+ * Home Component.
+ * The landing page for CivicAI, featuring a hero section, alternating content layouts,
+ * and a parallax scrolling gallery to introduce users to election process education.
+ *
+ * @component
+ * @returns {JSX.Element} The rendered Home page.
+ */
 const Home = () => {
   const navigate = useNavigate();
   const { scrollYProgress } = useScroll();
