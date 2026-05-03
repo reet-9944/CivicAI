@@ -18,7 +18,29 @@
       gtag('config', 'G-MEASUREMENT_ID');
     </script>
 
-
+    <!-- ② Google Translate -->
+    <script type="text/javascript">
+      function googleTranslateElementInit() {
+        // Wait for React to mount the Navbar before initializing
+        var checkExist = setInterval(function() {
+          if (document.getElementById('google_translate_element')) {
+            clearInterval(checkExist);
+            new google.translate.TranslateElement(
+              {
+                pageLanguage: 'en',
+                includedLanguages: 'es,fr,de,zh-CN,hi,ar,pt,ja,ko,ru',
+                layout: google.translate.TranslateElement.InlineLayout.SIMPLE,
+                autoDisplay: false
+              },
+              'google_translate_element'
+            );
+          }
+        }, 100);
+      }
+    </script>
+    <script type="text/javascript"
+      src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit">
+    </script>
   </head>
   <body>
     <div id="root"></div>
