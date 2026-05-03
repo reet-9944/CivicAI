@@ -217,6 +217,6 @@ body { top: 0 !important; }
 
 @media (max-width: 768px) {
   .nav-translate {
-    display: none;
+    margin-right: 10px;
   }
 }
