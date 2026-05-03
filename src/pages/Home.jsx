@@ -105,14 +105,14 @@ const Home = () => {
             </motion.div>
 
             <motion.h1 variants={itemVariants}>
-              Empowering Voters Through{' '}
-              <span className="highlight">Education</span>
+              <span className="highlight">Election Process</span> Communication & Education
             </motion.h1>
 
             <motion.p className="hero-subtitle" variants={itemVariants}>
               Democracy works best when everyone understands how to participate.
-              CivicAI is your personal, non-partisan guide to navigating the election process.
+              CivicAI uses Google Generative AI to deliver an accessible, non-partisan platform for comprehensive election process communication and voter education.
             </motion.p>
+
 
             <motion.div className="hero-actions" variants={itemVariants}>
               <Link to="/assistant" className="btn-primary" aria-label="Start chatting with CivicAI">

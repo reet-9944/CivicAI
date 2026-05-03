@@ -70,7 +70,10 @@ const Assistant = () => {
         .replace(/\*(.*?)\*/g, '<em>$1</em>')
         .replace(/\n/g, '<br/>');
 
-      const cleanHTML = DOMPurify.sanitize(formattedText);
+      const cleanHTML = DOMPurify.sanitize(formattedText, {
+        ALLOWED_TAGS: ['b', 'i', 'em', 'strong', 'a', 'p', 'br', 'ul', 'ol', 'li'],
+        ALLOWED_ATTR: ['href', 'target', 'rel']
+      });
 
       setMessages(prev => [...prev, { role: 'model', content: cleanHTML, isHtml: true }]);
     } catch (err) {
