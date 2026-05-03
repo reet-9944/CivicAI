@@ -95,7 +95,7 @@ const Home = () => {
   const galleryParallax2 = useTransform(scrollYProgress, [0.7, 1], [0, 120]);
 
   return (
-    <div className="home-page">
+    <main className="home-page" id="main-content">
 
       {/* ── Hero ── */}
       <motion.section
@@ -512,7 +512,7 @@ const Home = () => {
         </div>
       </section>
 
-    </div>
+    </main>
   );
 };
 
