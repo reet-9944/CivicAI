@@ -117,6 +117,12 @@ body::after {
   z-index: 1;
 }
 
+/* Push footer to bottom on short pages */
+#root > main,
+#root > .animate-fade-in {
+  flex: 1;
+}
+
 /* ─── Utilities ─────────────────────────────────────────────── */
 
 /* White frosted card — matches the image's white panels */

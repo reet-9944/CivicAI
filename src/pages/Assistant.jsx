@@ -61,7 +61,7 @@ const Assistant = () => {
     try {
       const genAI = new GoogleGenerativeAI(apiKey.trim());
       const model = genAI.getGenerativeModel({
-        model: 'gemini-1.5-flash',
+        model: 'gemini-2.0-flash',
         systemInstruction: SYSTEM_INSTRUCTION,
         generationConfig: {
           temperature: 0.2,
@@ -85,11 +85,15 @@ const Assistant = () => {
 
       setMessages(prev => [...prev, { role: 'model', content: cleanHTML, isHtml: true }]);
     } catch (err) {
-      // Suppressed for production code quality: console.error(err);
-      const errMsg =
-        err?.message?.includes('API_KEY_INVALID') || err?.message?.includes('401')
-          ? 'Invalid API key. Please check your Gemini API key and try again.'
-          : 'Failed to get a response. Please check your API key and try again.';
+      const msg = err?.message || '';
+      let errMsg = 'Failed to get a response. Please check your API key and try again.';
+      if (msg.includes('API_KEY_INVALID') || msg.includes('401') || msg.includes('invalid')) {
+        errMsg = 'Invalid API key. Please check your Gemini API key and try again.';
+      } else if (msg.includes('quota') || msg.includes('429') || msg.includes('RESOURCE_EXHAUSTED')) {
+        errMsg = 'Rate limit reached (free tier: 15 requests/min). Please wait 60 seconds and try again.';
+      } else if (msg.includes('not found') || msg.includes('404')) {
+        errMsg = 'Model not available. Please check your API key has Gemini access at aistudio.google.com.';
+      }
       setError(errMsg);
       setMessages(prev => [
         ...prev,

@@ -314,7 +314,12 @@
 #goog-gt-tt,
 .goog-te-balloon-frame { display: none !important; }
 
-body { top: 0 !important; }
+/* Prevent Google Translate from pushing body down */
+body.translated-ltr,
+body.translated-rtl {
+  margin-top: 0 !important;
+  top: 0 !important;
+}
 
 .goog-text-highlight {
   background: none !important;
