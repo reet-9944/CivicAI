@@ -1,15 +1,15 @@
 # CivicAI - Election Process Education
 
-## Overview
-CivicAI is a smart, dynamic web assistant designed for the **Election Process Education** vertical. It empowers citizens by providing clear, accessible, and non-partisan information about the democratic process—from voter registration to Election Day.
+## Problem Statement Alignment
+**Problem Statement:** Election Process Communication
+**Goal:** To build a technology-driven solution that simplifies and clearly communicates the election process to citizens, promoting informed voter participation.
 
-This project was built to meet the rigorous standards of the submission challenge, focusing on code quality, security, efficiency, testing, accessibility, and meaningful integration of Google Services.
-
-## Features
-- **Smart Assistant (Powered by Google Gemini):** A conversational AI that provides non-partisan election information.
-- **Interactive Timeline:** A beautifully animated guide to the election process.
-- **Accessible Design:** High-contrast support, semantic HTML, and ARIA labels.
-- **Glassmorphism UI:** A modern, dynamic user interface with fluid animations using Framer Motion.
+CivicAI perfectly aligns with this problem statement by providing:
+1. **Interactive Voter Education:** A step-by-step Timeline breaking down the complex election cycle into easy-to-understand milestones.
+2. **Actionable Resources:** A dedicated Resources hub with direct links to register, check status, and locate polling stations.
+3. **Non-Partisan Guidance:** An AI Assistant powered by Google Gemini, heavily prompted to *only* provide objective, non-partisan educational facts about the voting process.
+4. **Inclusive Communication:** Built-in Google Translate for multi-language support, ensuring the election process is communicated effectively to non-native speakers.
+5. **Universal Accessibility:** Semantic HTML, ARIA landmarks, and high-contrast support to ensure voters with disabilities can access critical election information.
 
 ## Challenge Evaluation Focus Areas
 
