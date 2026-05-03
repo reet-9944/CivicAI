@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+import { useState, useCallback } from 'react';
+import PropTypes from 'prop-types';
 import { motion, AnimatePresence } from 'framer-motion';
 import {
   FaCheckCircle, FaRegCircle, FaExternalLinkAlt,
@@ -122,6 +123,12 @@ const DonutChart = ({ pct, color, label }) => {
   );
 };
 
+DonutChart.propTypes = {
+  pct: PropTypes.number.isRequired,
+  color: PropTypes.string.isRequired,
+  label: PropTypes.string.isRequired,
+};
+
 /* ── Bar stat ────────────────────────────────────────────────── */
 const StatBar = ({ label, value, max, unit, color }) => (
   <div className="res-stat-bar">
@@ -141,20 +148,32 @@ const StatBar = ({ label, value, max, unit, color }) => (
   </div>
 );
 
-/* ── Main ────────────────────────────────────────────────────── */
+StatBar.propTypes = {
+  label: PropTypes.string.isRequired,
+  value: PropTypes.number.isRequired,
+  max: PropTypes.number.isRequired,
+  unit: PropTypes.string.isRequired,
+  color: PropTypes.string,
+};
+
+/**
+ * Resources component displaying educational guides.
+ * @returns {JSX.Element} The resources page.
+ */
 const Resources = () => {
   const [activeId, setActiveId] = useState('register');
   const [checked, setChecked] = useState({});
 
   const active = guides.find(g => g.id === activeId);
 
-  const toggleCheck = (guideId, idx) => {
+  const toggleCheck = useCallback((guideId, idx) => {
     const key = `${guideId}-${idx}`;
     setChecked(prev => ({ ...prev, [key]: !prev[key] }));
-  };
+  }, []);
 
-  const getDone = (guideId, total) =>
-    Array.from({ length: total }, (_, i) => checked[`${guideId}-${i}`]).filter(Boolean).length;
+  const getDone = useCallback((guideId, total) => {
+    return Array.from({ length: total }, (_, i) => checked[`${guideId}-${i}`]).filter(Boolean).length;
+  }, [checked]);
 
   return (
     <main className="resources-page container" id="main-content">

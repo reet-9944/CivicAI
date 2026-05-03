@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { GoogleGenerativeAI } from '@google/generative-ai';
 import { FaPaperPlane, FaRobot, FaUser, FaKey, FaSpinner } from 'react-icons/fa';
@@ -196,6 +196,7 @@ const Assistant = () => {
             aria-label="Type your question"
             disabled={isLoading}
             autoComplete="off"
+            maxLength={1000}
           />
           <button
             type="submit"

@@ -4,6 +4,10 @@ import { motion } from 'framer-motion';
 import { FaVoteYea, FaRobot, FaStream, FaHome, FaBookOpen } from 'react-icons/fa';
 import '../styles/Navbar.css';
 
+/**
+ * Navbar component for the main application navigation.
+ * @returns {JSX.Element} The rendered navigation bar.
+ */
 const Navbar = () => {
   const [menuOpen, setMenuOpen] = useState(false);
 

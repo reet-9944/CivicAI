@@ -1,4 +1,4 @@
-import React, { useRef } from 'react';
+import { useRef } from 'react';
 import { motion, useScroll, useTransform } from 'framer-motion';
 import { Link, useNavigate } from 'react-router-dom';
 import { FaRobot, FaShieldAlt, FaBullhorn, FaVoteYea, FaUsers, FaBalanceScale, FaTrophy, FaCalendarAlt, FaHandshake } from 'react-icons/fa';

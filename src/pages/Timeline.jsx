@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState, useCallback } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import {
   FaIdCard, FaMapMarkerAlt, FaVoteYea, FaBoxOpen,
@@ -82,21 +82,25 @@ const timelineData = [
   },
 ];
 
+/**
+ * Timeline component for displaying the election process steps.
+ * @returns {JSX.Element} The timeline page.
+ */
 const Timeline = () => {
   const [activeId, setActiveId] = useState(null);
   const [checked, setChecked] = useState({});
 
-  const toggle = (id) => setActiveId(prev => prev === id ? null : id);
+  const toggle = useCallback((id) => setActiveId(prev => prev === id ? null : id), []);
 
-  const toggleCheck = (stepId, idx) => {
+  const toggleCheck = useCallback((stepId, idx) => {
     const key = `${stepId}-${idx}`;
     setChecked(prev => ({ ...prev, [key]: !prev[key] }));
-  };
+  }, []);
 
-  const getProgress = (stepId, total) => {
+  const getProgress = useCallback((stepId, total) => {
     const done = Array.from({ length: total }, (_, i) => checked[`${stepId}-${i}`]).filter(Boolean).length;
     return Math.round((done / total) * 100);
-  };
+  }, [checked]);
 
   return (
     <main className="timeline-page container animate-fade-in" id="main-content">
@@ -320,7 +324,7 @@ const Timeline = () => {
 
         <div className="timeline-map-frame" role="region" aria-label="Google Maps showing polling stations">
           <iframe
-            title="Find Polling Stations – Google Maps"
+            title="Google Maps - Find Polling Stations Near You"
             src="https://www.google.com/maps/embed?pb=!1m16!1m12!1m3!1d387190.2799160891!2d-74.25987368715491!3d40.69767006856166!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!2m1!1spolling%20station!5e0!3m2!1sen!2sus!4v1699000000000!5m2!1sen!2sus"
             width="100%"
             height="420"
@@ -328,6 +332,8 @@ const Timeline = () => {
             allowFullScreen
             loading="lazy"
             referrerPolicy="no-referrer-when-downgrade"
+            sandbox="allow-scripts allow-same-origin allow-popups"
+            aria-label="Interactive map to locate polling stations"
           />
         </div>
 

@@ -2,6 +2,10 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import '../styles/Footer.css';
 
+/**
+ * Footer component for the main application.
+ * @returns {JSX.Element} The rendered footer.
+ */
 const Footer = () => {
   const year = new Date().getFullYear();
 
@@ -9,6 +13,10 @@ const Footer = () => {
     <footer className="footer" role="contentinfo">
       <div className="container footer-content">
         <p>&copy; {year} CivicAI – Election Process Education. All rights reserved.</p>
+        
+        <p className="mission-statement">
+          Built for Hack2Skill to enhance civic tech, voter education, and clearly communicate the election process.
+        </p>
 
         <nav className="footer-links" aria-label="Footer navigation">
           <Link to="/">Home</Link>
