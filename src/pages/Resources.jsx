@@ -344,4 +344,5 @@ const Resources = () => {
   );
 };
 
-export default Resources;
+import { memo } from 'react';
+export default memo(Resources);

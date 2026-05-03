@@ -347,4 +347,5 @@ const Timeline = () => {
   );
 };
 
-export default Timeline;
+import { memo } from 'react';
+export default memo(Timeline);

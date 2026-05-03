@@ -81,6 +81,9 @@ const Navbar = () => {
             </li>
           </ul>
 
+          {/* Google Translate widget */}
+          <div id="google_translate_element" className="nav-translate" aria-label="Translate page" />
+
           {/* Hamburger button (mobile) */}
           <button
             className="nav-hamburger"
@@ -93,9 +96,6 @@ const Navbar = () => {
             <span className="hamburger-line" aria-hidden="true" />
             <span className="hamburger-line" aria-hidden="true" />
           </button>
-
-          {/* ③ Google Translate widget */}
-          <div id="google_translate_element" className="nav-translate" aria-label="Translate page" />
         </div>
 
         {/* Mobile menu */}

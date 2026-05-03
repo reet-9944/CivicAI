@@ -3,8 +3,6 @@ import { motion, useScroll, useTransform } from 'framer-motion';
 import { Link, useNavigate } from 'react-router-dom';
 import { FaRobot, FaShieldAlt, FaBullhorn, FaVoteYea, FaUsers, FaBalanceScale, FaTrophy, FaCalendarAlt, FaHandshake } from 'react-icons/fa';
 import heroImage from '../assets/hero_election.png';
-
-const HERO_ILLUSTRATION = 'https://cdni.iconscout.com/illustration/premium/thumb/election-voting-4500558-3804469.png';
 import resourcesImg from '../assets/home_resources.png';
 import timelineImg from '../assets/home_timeline.png';
 import assistantImg from '../assets/home_assistant.png';
@@ -12,6 +10,8 @@ import registeringImg from '../assets/home_registering.png';
 import parallax1 from '../assets/parallax1.png';
 import parallax2 from '../assets/parallax2.png';
 import '../styles/Home.css';
+
+const HERO_ILLUSTRATION = 'https://cdni.iconscout.com/illustration/premium/thumb/election-voting-4500558-3804469.png';
 
 const containerVariants = {
   hidden: { opacity: 0 },
@@ -508,4 +508,5 @@ const Home = () => {
   );
 };
 
-export default Home;
+import { memo } from 'react';
+export default memo(Home);

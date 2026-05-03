@@ -212,4 +212,5 @@ const Assistant = () => {
   );
 };
 
-export default Assistant;
+import { memo } from 'react';
+export default memo(Assistant);
