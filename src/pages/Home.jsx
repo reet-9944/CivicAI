@@ -1,4 +1,4 @@
-import { useRef } from 'react';
+import { useRef, useCallback } from 'react';
 import { motion, useScroll, useTransform } from 'framer-motion';
 import { Link, useNavigate } from 'react-router-dom';
 import { FaRobot, FaShieldAlt, FaBullhorn, FaVoteYea, FaUsers, FaBalanceScale, FaTrophy, FaCalendarAlt, FaHandshake } from 'react-icons/fa';
@@ -93,6 +93,14 @@ const Home = () => {
   const quoteY = useTransform(scrollYProgress, [0.05, 0.28], [40, -40]);
   const galleryParallax1 = useTransform(scrollYProgress, [0.7, 1], [0, -120]);
   const galleryParallax2 = useTransform(scrollYProgress, [0.7, 1], [0, 120]);
+
+  const navToResources = useCallback(() => navigate('/resources'), [navigate]);
+  const navToTimeline = useCallback(() => navigate('/timeline'), [navigate]);
+  const navToAssistant = useCallback(() => navigate('/assistant'), [navigate]);
+
+  const handleKeyDown = useCallback((e, path) => {
+    if (e.key === 'Enter') navigate(path);
+  }, [navigate]);
 
   return (
     <main className="home-page" id="main-content">
@@ -218,10 +226,10 @@ const Home = () => {
           >
             <h2
               className="clickable-heading"
-              onClick={() => navigate('/resources')}
+              onClick={navToResources}
               role="button"
               tabIndex={0}
-              onKeyDown={e => e.key === 'Enter' && navigate('/resources')}
+              onKeyDown={e => handleKeyDown(e, '/resources')}
               aria-label="Navigate to Resources page"
             >
               Prepare to Vote
@@ -255,10 +263,10 @@ const Home = () => {
           >
             <h2
               className="clickable-heading"
-              onClick={() => navigate('/timeline')}
+              onClick={navToTimeline}
               role="button"
               tabIndex={0}
-              onKeyDown={e => e.key === 'Enter' && navigate('/timeline')}
+              onKeyDown={e => handleKeyDown(e, '/timeline')}
               aria-label="Navigate to Timeline page"
             >
               The Election Timeline
@@ -337,10 +345,10 @@ const Home = () => {
           >
             <h2
               className="clickable-heading"
-              onClick={() => navigate('/assistant')}
+              onClick={navToAssistant}
               role="button"
               tabIndex={0}
-              onKeyDown={e => e.key === 'Enter' && navigate('/assistant')}
+              onKeyDown={e => handleKeyDown(e, '/assistant')}
               aria-label="Navigate to AI Assistant page"
             >
               Ask the AI Assistant

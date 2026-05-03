@@ -5,43 +5,53 @@ import { FaVoteYea, FaRobot, FaStream, FaHome, FaBookOpen } from 'react-icons/fa
 import '../styles/Navbar.css';
 
 /**
- * Navbar component for the main application navigation.
- * @returns {JSX.Element} The rendered navigation bar.
+ * MutationObserver hook — watches the DOM and:
+ * 1. Moves the Google Translate widget back into #google_translate_element
+ *    if Google tries to relocate it elsewhere in the page.
+ * 2. Hides the Google top-bar banner that Google injects into <body>.
+ *
+ * The actual Google Translate script is loaded in index.html via the
+ * official Google Translate Element API:
+ * https://translate.google.com/translate_a/element.js
  */
+function useKeepTranslateInNavbar() {
+  useEffect(() => {
+    const navSlot = document.getElementById('google_translate_element');
+    if (!navSlot) return;
+
+    const fix = () => {
+      // Move widget back to navbar if Google relocated it
+      const widget = document.querySelector('.goog-te-gadget');
+      if (widget && widget.parentElement !== navSlot) {
+        navSlot.appendChild(widget);
+      }
+      // Suppress the Google top-bar
+      const bar = document.querySelector('.goog-te-banner-frame');
+      if (bar) bar.style.display = 'none';
+      if (document.body.style.top && document.body.style.top !== '0px') {
+        document.body.style.top = '0';
+      }
+    };
+
+    const observer = new MutationObserver(fix);
+    observer.observe(document.body, { childList: true, subtree: false });
+
+    // Run once immediately in case widget already rendered
+    fix();
+
+    return () => observer.disconnect();
+  }, []);
+}
+
 const Navbar = () => {
   const [menuOpen, setMenuOpen] = useState(false);
 
-  // Close menu on route change / resize
-  useEffect(() => {
-    const handleResize = () => {
-      if (window.innerWidth > 768) setMenuOpen(false);
-    };
-    window.addEventListener('resize', handleResize);
-    return () => window.removeEventListener('resize', handleResize);
-  }, []);
+  useKeepTranslateInNavbar();
 
-  // Initialize Google Translate
   useEffect(() => {
-    // Only add if it doesn't already exist to prevent duplicates during HMR
-    if (!document.getElementById('google-translate-script')) {
-      window.googleTranslateElementInit = () => {
-        new window.google.translate.TranslateElement(
-          {
-            pageLanguage: 'en',
-            includedLanguages: 'es,fr,de,zh-CN,hi,ar,pt,ja,ko,ru',
-            layout: window.google.translate.TranslateElement.InlineLayout.SIMPLE,
-            autoDisplay: false,
-          },
-          'google_translate_element'
-        );
-      };
-
-      const script = document.createElement('script');
-      script.id = 'google-translate-script';
-      script.src = 'https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit';
-      script.async = true;
-      document.body.appendChild(script);
-    }
+    const onResize = () => { if (window.innerWidth > 768) setMenuOpen(false); };
+    window.addEventListener('resize', onResize);
+    return () => window.removeEventListener('resize', onResize);
   }, []);
 
   const closeMenu = () => setMenuOpen(false);
@@ -56,6 +66,8 @@ const Navbar = () => {
         aria-label="Main navigation"
       >
         <div className="container nav-container">
+
+          {/* Logo */}
           <Link to="/" className="nav-logo" aria-label="CivicAI – go to home page" onClick={closeMenu}>
             <FaVoteYea className="logo-icon" aria-hidden="true" />
             <span>
@@ -64,51 +76,50 @@ const Navbar = () => {
             </span>
           </Link>
 
-          {/* Desktop links */}
+          {/* Desktop nav links */}
           <ul className="nav-links" role="list">
             <li>
-              <NavLink
-                to="/"
-                end
+              <NavLink to="/" end
                 className={({ isActive }) => isActive ? 'nav-link active' : 'nav-link'}
-                aria-label="Home"
-              >
+                aria-label="Home">
                 <FaHome aria-hidden="true" /> <span>Home</span>
               </NavLink>
             </li>
             <li>
-              <NavLink
-                to="/timeline"
+              <NavLink to="/timeline"
                 className={({ isActive }) => isActive ? 'nav-link active' : 'nav-link'}
-                aria-label="Election Process Timeline"
-              >
+                aria-label="Election Process Timeline">
                 <FaStream aria-hidden="true" /> <span>Process</span>
               </NavLink>
             </li>
             <li>
-              <NavLink
-                to="/resources"
+              <NavLink to="/resources"
                 className={({ isActive }) => isActive ? 'nav-link active' : 'nav-link'}
-                aria-label="Voter Resources"
-              >
+                aria-label="Voter Resources">
                 <FaBookOpen aria-hidden="true" /> <span>Resources</span>
               </NavLink>
             </li>
             <li>
-              <NavLink
-                to="/assistant"
+              <NavLink to="/assistant"
                 className={({ isActive }) => isActive ? 'nav-link btn-assistant active' : 'nav-link btn-assistant'}
-                aria-label="Ask the AI Assistant"
-              >
+                aria-label="Ask the AI Assistant">
                 <FaRobot aria-hidden="true" /> <span>Ask AI</span>
               </NavLink>
             </li>
           </ul>
 
-          {/* Google Translate widget */}
-          <div id="google_translate_element" className="nav-translate" aria-label="Translate page" />
+          {/*
+            Google Translate widget target.
+            The official Google Translate Element API (loaded in index.html)
+            renders its language selector dropdown inside this div.
+          */}
+          <div
+            id="google_translate_element"
+            className="nav-translate"
+            aria-label="Translate this page using Google Translate"
+          />
 
-          {/* Hamburger button (mobile) */}
+          {/* Hamburger (mobile) */}
           <button
             className="nav-hamburger"
             aria-label={menuOpen ? 'Close navigation menu' : 'Open navigation menu'}
@@ -130,37 +141,16 @@ const Navbar = () => {
           role="navigation"
           aria-label="Mobile navigation"
         >
-          <NavLink
-            to="/"
-            end
-            className={({ isActive }) => isActive ? 'nav-link active' : 'nav-link'}
-            onClick={closeMenu}
-            aria-label="Home"
-          >
+          <NavLink to="/" end className={({ isActive }) => isActive ? 'nav-link active' : 'nav-link'} onClick={closeMenu} aria-label="Home">
             <FaHome aria-hidden="true" /> Home
           </NavLink>
-          <NavLink
-            to="/timeline"
-            className={({ isActive }) => isActive ? 'nav-link active' : 'nav-link'}
-            onClick={closeMenu}
-            aria-label="Election Process Timeline"
-          >
+          <NavLink to="/timeline" className={({ isActive }) => isActive ? 'nav-link active' : 'nav-link'} onClick={closeMenu} aria-label="Election Process Timeline">
             <FaStream aria-hidden="true" /> Process
           </NavLink>
-          <NavLink
-            to="/resources"
-            className={({ isActive }) => isActive ? 'nav-link active' : 'nav-link'}
-            onClick={closeMenu}
-            aria-label="Voter Resources"
-          >
+          <NavLink to="/resources" className={({ isActive }) => isActive ? 'nav-link active' : 'nav-link'} onClick={closeMenu} aria-label="Voter Resources">
             <FaBookOpen aria-hidden="true" /> Resources
           </NavLink>
-          <NavLink
-            to="/assistant"
-            className={({ isActive }) => isActive ? 'nav-link btn-assistant active' : 'nav-link btn-assistant'}
-            onClick={closeMenu}
-            aria-label="Ask the AI Assistant"
-          >
+          <NavLink to="/assistant" className={({ isActive }) => isActive ? 'nav-link btn-assistant active' : 'nav-link btn-assistant'} onClick={closeMenu} aria-label="Ask the AI Assistant">
             <FaRobot aria-hidden="true" /> Ask AI
           </NavLink>
         </div>

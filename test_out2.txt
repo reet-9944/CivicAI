@@ -1,0 +1,492 @@
+
+> election-process-communication@0.0.0 test
+> vitest run src/pages/Assistant.test.jsx
+
+
+[1m[30m[46m RUN [49m[39m[22m [36mv4.1.5 [39m[90mC:/Users/reetu/Desktop/Election_Process_Communication[39m
+
+[90mstderr[2m | src/pages/Assistant.test.jsx[2m > [22m[2mAssistant Page[2m > [22m[2mshows error when sending without API key
+[22m[39m[vitest] The vi.fn() mock did not use 'function' or 'class' in its implementation, see https://vitest.dev/api/vi#vi-spyon for examples.
+
+[90mstderr[2m | src/pages/Assistant.test.jsx[2m > [22m[2mAssistant Page[2m > [22m[2mhandles a successful API response correctly
+[22m[39m[vitest] The vi.fn() mock did not use 'function' or 'class' in its implementation, see https://vitest.dev/api/vi#vi-spyon for examples.
+
+[90mstderr[2m | src/pages/Assistant.test.jsx[2m > [22m[2mAssistant Page[2m > [22m[2mhandles API error response gracefully
+[22m[39m[vitest] The vi.fn() mock did not use 'function' or 'class' in its implementation, see https://vitest.dev/api/vi#vi-spyon for examples.
+
+ [31m❯[39m src/pages/Assistant.test.jsx [2m([22m[2m14 tests[22m[2m | [22m[31m1 failed[39m[2m)[22m[33m 1256[2mms[22m[39m
+     [32m✓[39m renders the page heading[32m 102[2mms[22m[39m
+     [32m✓[39m renders the API key input[32m 8[2mms[22m[39m
+     [32m✓[39m renders the initial welcome message[32m 6[2mms[22m[39m
+     [32m✓[39m renders the chat input field[32m 5[2mms[22m[39m
+     [32m✓[39m renders the send button[32m 12[2mms[22m[39m
+     [32m✓[39m send button is disabled when input is empty[32m 8[2mms[22m[39m
+     [32m✓[39m send button enables when user types a message[32m 16[2mms[22m[39m
+     [32m✓[39m shows error when sending without API key[32m 28[2mms[22m[39m
+     [32m✓[39m has a main landmark with correct id[32m 5[2mms[22m[39m
+     [32m✓[39m chat messages region has aria-live attribute[32m 7[2mms[22m[39m
+     [32m✓[39m API key input has autocomplete off for security[32m 5[2mms[22m[39m
+     [32m✓[39m updates API key input value when typed[32m 6[2mms[22m[39m
+[31m     [31m×[31m handles a successful API response correctly[39m[33m 1034[2mms[22m[39m
+     [32m✓[39m handles API error response gracefully[32m 12[2mms[22m[39m
+
+[31m⎯⎯⎯⎯⎯⎯⎯[39m[1m[41m Failed Tests 1 [49m[22m[31m⎯⎯⎯⎯⎯⎯⎯[39m
+
+[41m[1m FAIL [22m[49m src/pages/Assistant.test.jsx[2m > [22mAssistant Page[2m > [22mhandles a successful API response correctly
+[31m[1mTestingLibraryElementError[22m[39m: Unable to find an element with the text: /Voter registration is the process of signing up to vote./i. This could be because the text is broken up by multiple elements. In this case, you can provide a function for your text matcher to make your matcher more flexible.
+
+Ignored nodes: comments, script, style
+[36m<body>[39m
+  [36m<div>[39m
+    [36m<main[39m
+      [33mclass[39m=[32m"assistant-page container animate-fade-in"[39m
+      [33mid[39m=[32m"main-content"[39m
+    [36m>[39m
+      [36m<div[39m
+        [33mclass[39m=[32m"assistant-header"[39m
+      [36m>[39m
+        [36m<h1>[39m
+          [0mAsk CivicAI[0m
+        [36m</h1>[39m
+        [36m<p>[39m
+          [0mGet answers to your questions about the election process — securely and privately.[0m
+        [36m</p>[39m
+      [36m</div>[39m
+      [36m<div[39m
+        [33maria-label[39m=[32m"API Key configuration"[39m
+        [33mclass[39m=[32m"api-key-container glass-panel"[39m
+        [33mrole[39m=[32m"region"[39m
+      [36m>[39m
+        [36m<label[39m
+          [33mclass[39m=[32m"api-key-label"[39m
+          [33mfor[39m=[32m"apiKey"[39m
+        [36m>[39m
+          [36m<svg[39m
+            [33maria-hidden[39m=[32m"true"[39m
+            [33mfill[39m=[32m"currentColor"[39m
+            [33mheight[39m=[32m"1em"[39m
+            [33mstroke[39m=[32m"currentColor"[39m
+            [33mstroke-width[39m=[32m"0"[39m
+            [33mviewBox[39m=[32m"0 0 512 512"[39m
+            [33mwidth[39m=[32m"1em"[39m
+            [33mxmlns[39m=[32m"http://www.w3.org/2000/svg"[39m
+          [36m>[39m
+            [36m<path[39m
+              [33md[39m=[32m"M512 176.001C512 273.203 433.202 352 336 352c-11.22 0-22.19-1.062-32.827-3.069l-24.012 27.014A23.999 23.999 0 0 1 261.223 384H224v40c0 13.255-10.745 24-24 24h-40v40c0 13.255-10.745 24-24 24H24c-13.255 0-24-10.745-24-24v-78.059c0-6.365 2.529-12.47 7.029-16.971l161.802-161.802C163.108 213.814 160 195.271 160 176 160 78.798 238.797.001 335.999 0 433.488-.001 512 78.511 512 176.001zM336 128c0 26.51 21.49 48 48 48s48-21.49 48-48-21.49-48-48-48-48 21.49-48 48z"[39m
+            [36m/>[39m
+          [36m</svg>[39m
+          [0m Gemini API Key (Required):[0m
+        [36m</label>[39m
+        [36m<input[39m
+          [33maria-describedby[39m=[32m"apiKey-hint"[39m
+          [33maria-label[39m=[32m"Enter your Google Gemini API key"[39m
+          [33mautocomplete[39m=[32m"off"[39m
+          [33mclass[39m=[32m"api-key-input"[39m
+          [33mid[39m=[32m"apiKey"[39m
+          [33mplaceholder[39m=[32m"AIzaSy..."[39m
+          [33mtype[39m=[32m"password"[39m
+          [33mvalue[39m=[32m"valid-api-key"[39m
+        [36m/>[39m
+        [36m<small[39m
+          [33mid[39m=[32m"apiKey-hint"[39m
+        [36m>[39m
+          [0mYour key is stored locally in your browser session only.[0m
+        [36m</small>[39m
+      [36m</div>[39m
+      [36m<div[39m
+        [33maria-label[39m=[32m"Chat with CivicAI"[39m
+        [33mclass[39m=[32m"chat-container glass-panel"[39m
+        [33mrole[39m=[32m"region"[39m
+      [36m>[39m
+        [36m<div[39m
+          [33maria-label[39m=[32m"Conversation history"[39m
+          [33maria-live[39m=[32m"polite"[39m
+          [33maria-relevant[39m=[32m"additions"[39m
+          [33mclass[39m=[32m"chat-messages"[39m
+          [33mrole[39m=[32m"log"[39m
+        [36m>[39m
+          [36m<div[39m
+            [33maria-label[39m=[32m"CivicAI response"[39m
+            [33mclass[39m=[32m"message-wrapper model"[39m
+            [33mrole[39m=[32m"article"[39m
+            [33mstyle[39m=[32m"opacity: 1; transform: none;"[39m
+          [36m>[39m
+            [36m<div[39m
+              [33maria-hidden[39m=[32m"true"[39m
+              [33mclass[39m=[32m"message-avatar"[39m
+            [36m>[39m
+              [36m<svg[39m
+                [33mfill[39m=[32m"currentColor"[39m
+                [33mheight[39m=[32m"1em"[39m
+                [33mstroke[39m=[32m"currentColor"[39m
+                [33mstroke-width[39m=[32m"0"[39m
+                [33mviewBox[39m=[32m"0 0 640 512"[39m
+                [33mwidth[39m=[32m"1em"[39m
+                [33mxmlns[39m=[32m"http://www.w3.org/2000/svg"[39m
+              [36m>[39m
+                [36m<path[39m
+                  [33md[39m=[32m"M32,224H64V416H32A31.96166,31.96166,0,0,1,0,384V256A31.96166,31.96166,0,0,1,32,224Zm512-48V448a64.06328,64.06328,0,0,1-64,64H160a64.06328,64.06328,0,0,1-64-64V176a79.974,79.974,0,0,1,80-80H288V32a32,32,0,0,1,64,0V96H464A79.974,79.974,0,0,1,544,176ZM264,256a40,40,0,1,0-40,40A39.997,39.997,0,0,0,264,256Zm-8,128H192v32h64Zm96,0H288v32h64ZM456,256a40,40,0,1,0-40,40A39.997,39.997,0,0,0,456,256Zm-8,128H384v32h64ZM640,256V384a31.96166,31.96166,0,0,1-32,32H576V224h32A31.96166,31.96166,0,0,1,640,256Z"[39m
+                [36m/>[39m
+              [36m</svg>[39m
+            [36m</div>[39m
+            [36m<div[39m
+              [33mclass[39m=[32m"message-content"[39m
+            [36m>[39m
+              [0mHello! I am CivicAI, your non-partisan guide to the election process. How can I help you today? (Note: Please provide your Gemini API key in the settings below to start chatting.)[0m
+            [36m</div>[39m
+          [36m</div>[39m
+          [36m<div[39m
+            [33maria-label[39m=[32m"Your message"[39m
+            [33mclass[39m=[32m"message-wrapper user"[39m
+            [33mrole[39m=[32m"article"[39m
+            [33mstyle[39m=[32m"opacity: 1; transform: none;"[39m
+          [36m>[39m
+            [36m<div[39m
+              [33maria-hidden[39m=[32m"true"[39m
+              [33mclass[39m=[32m"message-avatar"[39m
+            [36m>[39m
+              [36m<svg[39m
+                [33mfill[39m=[32m"currentColor"[39m
+                [33mheight[39m=[32m"1em"[39m
+                [33mstroke[39m=[32m"currentColor"[39m
+                [33mstroke-width[39m=[32m"0"[39m
+                [33mviewBox[39m=[32m"0 0 448 512"[39m
+                [33mwidth[39m=[32m"1em"[39m
+                [33mxmlns[39m=[32m"http://www.w3.org/2000/svg"[39m
+              [36m>[39m
+                [36m<path[39m
+                  [33md[39m=[32m"M224 256c70.7 0 128-57.3 128-128S294.7 0 224 0 96 57.3 96 128s57.3 128 128 128zm89.6 32h-16.7c-22.2 10.2-46.9 16-72.9 16s-50.6-5.8-72.9-16h-16.7C60.2 288 0 348.2 0 422.4V464c0 26.5 21.5 48 48 48h352c26.5 0 48-21.5 48-48v-41.6c0-74.2-60.2-134.4-134.4-134.4z"[39m
+                [36m/>[39m
+              [36m</svg>[39m
+            [36m</div>[39m
+            [36m<div[39m
+              [33mclass[39m=[32m"message-content"[39m
+            [36m>[39m
+              [0mHow do I register?[0m
+            [36m</div>[39m
+          [36m</div>[39m
+          [36m<div[39m
+            [33maria-label[39m=[32m"CivicAI response"[39m
+            [33mclass[39m=[32m"message-wrapper model"[39m
+            [33mrole[39m=[32m"article"[39m
+            [33mstyle[39m=[32m"opacity: 1; transform: none;"[39m
+          [36m>[39m
+            [36m<div[39m
+              [33maria-hidden[39m=[32m"true"[39m
+              [33mclass[39m=[32m"message-avatar"[39m
+            [36m>[39m
+              [36m<svg[39m
+                [33mfill[39m=[32m"currentColor"[39m
+                [33mheight[39m=[32m"1em"[39m
+                [33mstroke[39m=[32m"currentColor"[39m
+                [33mstroke-width[39m=[32m"0"[39m
+                [33mviewBox[39m=[32m"0 0 640 512"[39m
+                [33mwidth[39m=[32m"1em"[39m
+                [33mxmlns[39m=[32m"http://www.w3.org/2000/svg"[39m
+              [36m>[39m
+                [36m<path[39m
+                  [33md[39m=[32m"M32,224H64V416H32A31.96166,31.96166,0,0,1,0,384V256A31.96166,31.96166,0,0,1,32,224Zm512-48V448a64.06328,64.06328,0,0,1-64,64H160a64.06328,64.06328,0,0,1-64-64V176a79.974,79.974,0,0,1,80-80H288V32a32,32,0,0,1,64,0V96H464A79.974,79.974,0,0,1,544,176ZM264,256a40,40,0,1,0-40,40A39.997,39.997,0,0,0,264,256Zm-8,128H192v32h64Zm96,0H288v32h64ZM456,256a40,40,0,1,0-40,40A39.997,39.997,0,0,0,456,256Zm-8,128H384v32h64ZM640,256V384a31.96166,31.96166,0,0,1-32,32H576V224h32A31.96166,31.96166,0,0,1,640,256Z"[39m
+                [36m/>[39m
+              [36m</svg>[39m
+            [36m</div>[39m
+            [36m<div[39m
+              [33mclass[39m=[32m"message-content"[39m
+            [36m>[39m
+              [0mSorry, I encountered an error. Please verify your API key.[0m
+            [36m</div>[39m
+          [36m</div>[39m
+          [36m<div[39m
+            [33maria-live[39m=[32m"assertive"[39m
+            [33mclass[39m=[32m"error-message"[39m
+            [33mrole[39m=[32m"alert"[39m
+          [36m>[39m
+            [0mFailed to get a response. Please check your API key and try again.[0m
+          [36m</div>[39m
+          [36m<div[39m
+            [33maria-hidden[39m=[32m"true"[39m
+          [36m/>[39m
+        [36m</div>[39m
+        [36m<form[39m
+          [33maria-label[39m=[32m"Send a message"[39m
+          [33mclass[39m=[32m"chat-input-form"[39m
+        [36m>[39m
+          [36m<label[39m
+            [33mclass[39m=[32m"sr-only"[39m
+            [33mfor[39m=[32m"chat-input"[39m
+          [36m>[39m
+            [0mType your question about the election process[0m
+          [36m</label>[39m
+          [36m<input[39m
+            [33maria-label[39m=[32m"Type your question"[39m
+            [33mautocomplete[39m=[32m"off"[39m
+            [33mclass[39m=[32m"chat-input"[39m
+            [33mid[39m=[32m"chat-input"[39m
+            [33mmaxlength[39m=[32m"1000"[39m
+            [33mplaceholder[39m=[32m"Ask about voter registration, polling places, ballots…"[39m
+            [33mtype[39m=[32m"text"[39m
+            [33mvalue[39m=[32m""[39m
+          [36m/>[39m
+          [36m<button[39m
+            [33maria-label[39m=[32m"Send message"[39m
+            [33mclass[39m=[32m"btn-primary send-btn"[39m
+            [33mdisabled[39m=[32m""[39m
+            [33mtype[39m=[32m"submit"[39m
+          [36m>[39m
+            [36m<svg[39m
+              [33maria-hidden[39m=[32m"true"[39m
+              [33mfill[39m=[32m"currentColor"[39m
+              [33mheight[39m=[32m"1em"[39m
+              [33mstroke[39m=[32m"currentColor"[39m
+              [33mstroke-width[39m=[32m"0"[39m
+              [33mviewBox[39m=[32m"0 0 512 512"[39m
+              [33mwidth[39m=[32m"1em"[39m
+              [33mxmlns[39m=[32m"http://www.w3.org/2000/svg"[39m
+            [36m>[39m
+              [36m<path[39m
+                [33md[39m=[32m"M476 3.2L12.5 270.6c-18.1 10.4-15.8 35.6 2.2 43.2L121 358.4l287.3-253.2c5.5-4.9 13.3 2.6 8.6 8.3L176 407v80.5c0 23.6 28.5 32.9 42.5 15.8L282 426l124.6 52.2c14.2 6 30.4-2.9 33-18.2l72-432C515 7.8 493.3-6.8 476 3.2z"[39m
+              [36m/>[39m
+            [36m</svg>[39m
+          [36m</button>[39m
+        [36m</form>[39m
+      [36m</div>[39m
+    [36m</main>[39m
+  [36m</div>[39m
+[36m</body>[39m
+
+Ignored nodes: comments, script, style
+[36m<html>[39m
+  [36m<head />[39m
+  [36m<body>[39m
+    [36m<div>[39m
+      [36m<main[39m
+        [33mclass[39m=[32m"assistant-page container animate-fade-in"[39m
+        [33mid[39m=[32m"main-content"[39m
+      [36m>[39m
+        [36m<div[39m
+          [33mclass[39m=[32m"assistant-header"[39m
+        [36m>[39m
+          [36m<h1>[39m
+            [0mAsk CivicAI[0m
+          [36m</h1>[39m
+          [36m<p>[39m
+            [0mGet answers to your questions about the election process — securely and privately.[0m
+          [36m</p>[39m
+        [36m</div>[39m
+        [36m<div[39m
+          [33maria-label[39m=[32m"API Key configuration"[39m
+          [33mclass[39m=[32m"api-key-container glass-panel"[39m
+          [33mrole[39m=[32m"region"[39m
+        [36m>[39m
+          [36m<label[39m
+            [33mclass[39m=[32m"api-key-label"[39m
+            [33mfor[39m=[32m"apiKey"[39m
+          [36m>[39m
+            [36m<svg[39m
+              [33maria-hidden[39m=[32m"true"[39m
+              [33mfill[39m=[32m"currentColor"[39m
+              [33mheight[39m=[32m"1em"[39m
+              [33mstroke[39m=[32m"currentColor"[39m
+              [33mstroke-width[39m=[32m"0"[39m
+              [33mviewBox[39m=[32m"0 0 512 512"[39m
+              [33mwidth[39m=[32m"1em"[39m
+              [33mxmlns[39m=[32m"http://www.w3.org/2000/svg"[39m
+            [36m>[39m
+              [36m<path[39m
+                [33md[39m=[32m"M512 176.001C512 273.203 433.202 352 336 352c-11.22 0-22.19-1.062-32.827-3.069l-24.012 27.014A23.999 23.999 0 0 1 261.223 384H224v40c0 13.255-10.745 24-24 24h-40v40c0 13.255-10.745 24-24 24H24c-13.255 0-24-10.745-24-24v-78.059c0-6.365 2.529-12.47 7.029-16.971l161.802-161.802C163.108 213.814 160 195.271 160 176 160 78.798 238.797.001 335.999 0 433.488-.001 512 78.511 512 176.001zM336 128c0 26.51 21.49 48 48 48s48-21.49 48-48-21.49-48-48-48-48 21.49-48 48z"[39m
+              [36m/>[39m
+            [36m</svg>[39m
+            [0m Gemini API Key (Required):[0m
+          [36m</label>[39m
+          [36m<input[39m
+            [33maria-describedby[39m=[32m"apiKey-hint"[39m
+            [33maria-label[39m=[32m"Enter your Google Gemini API key"[39m
+            [33mautocomplete[39m=[32m"off"[39m
+            [33mclass[39m=[32m"api-key-input"[39m
+            [33mid[39m=[32m"apiKey"[39m
+            [33mplaceholder[39m=[32m"AIzaSy..."[39m
+            [33mtype[39m=[32m"password"[39m
+            [33mvalue[39m=[32m"valid-api-key"[39m
+          [36m/>[39m
+          [36m<small[39m
+            [33mid[39m=[32m"apiKey-hint"[39m
+          [36m>[39m
+            [0mYour key is stored locally in your browser session only.[0m
+          [36m</small>[39m
+        [36m</div>[39m
+        [36m<div[39m
+          [33maria-label[39m=[32m"Chat with CivicAI"[39m
+          [33mclass[39m=[32m"chat-container glass-panel"[39m
+          [33mrole[39m=[32m"region"[39m
+        [36m>[39m
+          [36m<div[39m
+            [33maria-label[39m=[32m"Conversation history"[39m
+            [33maria-live[39m=[32m"polite"[39m
+            [33maria-relevant[39m=[32m"additions"[39m
+            [33mclass[39m=[32m"chat-messages"[39m
+            [33mrole[39m=[32m"log"[39m
+          [36m>[39m
+            [36m<div[39m
+              [33maria-label[39m=[32m"CivicAI response"[39m
+              [33mclass[39m=[32m"message-wrapper model"[39m
+              [33mrole[39m=[32m"article"[39m
+              [33mstyle[39m=[32m"opacity: 1; transform: none;"[39m
+            [36m>[39m
+              [36m<div[39m
+                [33maria-hidden[39m=[32m"true"[39m
+                [33mclass[39m=[32m"message-avatar"[39m
+              [36m>[39m
+                [36m<svg[39m
+                  [33mfill[39m=[32m"currentColor"[39m
+                  [33mheight[39m=[32m"1em"[39m
+                  [33mstroke[39m=[32m"currentColor"[39m
+                  [33mstroke-width[39m=[32m"0"[39m
+                  [33mviewBox[39m=[32m"0 0 640 512"[39m
+                  [33mwidth[39m=[32m"1em"[39m
+                  [33mxmlns[39m=[32m"http://www.w3.org/2000/svg"[39m
+                [36m>[39m
+                  [36m<path[39m
+                    [33md[39m=[32m"M32,224H64V416H32A31.96166,31.96166,0,0,1,0,384V256A31.96166,31.96166,0,0,1,32,224Zm512-48V448a64.06328,64.06328,0,0,1-64,64H160a64.06328,64.06328,0,0,1-64-64V176a79.974,79.974,0,0,1,80-80H288V32a32,32,0,0,1,64,0V96H464A79.974,79.974,0,0,1,544,176ZM264,256a40,40,0,1,0-40,40A39.997,39.997,0,0,0,264,256Zm-8,128H192v32h64Zm96,0H288v32h64ZM456,256a40,40,0,1,0-40,40A39.997,39.997,0,0,0,456,256Zm-8,128H384v32h64ZM640,256V384a31.96166,31.96166,0,0,1-32,32H576V224h32A31.96166,31.96166,0,0,1,640,256Z"[39m
+                  [36m/>[39m
+                [36m</svg>[39m
+              [36m</div>[39m
+              [36m<div[39m
+                [33mclass[39m=[32m"message-content"[39m
+              [36m>[39m
+                [0mHello! I am CivicAI, your non-partisan guide to the election process. How can I help you today? (Note: Please provide your Gemini API key in the settings below to start chatting.)[0m
+              [36m</div>[39m
+            [36m</div>[39m
+            [36m<div[39m
+              [33maria-label[39m=[32m"Your message"[39m
+              [33mclass[39m=[32m"message-wrapper user"[39m
+              [33mrole[39m=[32m"article"[39m
+              [33mstyle[39m=[32m"opacity: 1; transform: none;"[39m
+            [36m>[39m
+              [36m<div[39m
+                [33maria-hidden[39m=[32m"true"[39m
+                [33mclass[39m=[32m"message-avatar"[39m
+              [36m>[39m
+                [36m<svg[39m
+                  [33mfill[39m=[32m"currentColor"[39m
+                  [33mheight[39m=[32m"1em"[39m
+                  [33mstroke[39m=[32m"currentColor"[39m
+                  [33mstroke-width[39m=[32m"0"[39m
+                  [33mviewBox[39m=[32m"0 0 448 512"[39m
+                  [33mwidth[39m=[32m"1em"[39m
+                  [33mxmlns[39m=[32m"http://www.w3.org/2000/svg"[39m
+                [36m>[39m
+                  [36m<path[39m
+                    [33md[39m=[32m"M224 256c70.7 0 128-57.3 128-128S294.7 0 224 0 96 57.3 96 128s57.3 128 128 128zm89.6 32h-16.7c-22.2 10.2-46.9 16-72.9 16s-50.6-5.8-72.9-16h-16.7C60.2 288 0 348.2 0 422.4V464c0 26.5 21.5 48 48 48h352c26.5 0 48-21.5 48-48v-41.6c0-74.2-60.2-134.4-134.4-134.4z"[39m
+                  [36m/>[39m
+                [36m</svg>[39m
+              [36m</div>[39m
+              [36m<div[39m
+                [33mclass[39m=[32m"message-content"[39m
+              [36m>[39m
+                [0mHow do I register?[0m
+              [36m</div>[39m
+            [36m</div>[39m
+            [36m<div[39m
+              [33maria-label[39m=[32m"CivicAI response"[39m
+              [33mclass[39m=[32m"message-wrapper model"[39m
+              [33mrole[39m=[32m"article"[39m
+              [33mstyle[39m=[32m"opacity: 1; transform: none;"[39m
+            [36m>[39m
+              [36m<div[39m
+                [33maria-hidden[39m=[32m"true"[39m
+                [33mclass[39m=[32m"message-avatar"[39m
+              [36m>[39m
+                [36m<svg[39m
+                  [33mfill[39m=[32m"currentColor"[39m
+                  [33mheight[39m=[32m"1em"[39m
+                  [33mstroke[39m=[32m"currentColor"[39m
+                  [33mstroke-width[39m=[32m"0"[39m
+                  [33mviewBox[39m=[32m"0 0 640 512"[39m
+                  [33mwidth[39m=[32m"1em"[39m
+                  [33mxmlns[39m=[32m"http://www.w3.org/2000/svg"[39m
+                [36m>[39m
+                  [36m<path[39m
+                    [33md[39m=[32m"M32,224H64V416H32A31.96166,31.96166,0,0,1,0,384V256A31.96166,31.96166,0,0,1,32,224Zm512-48V448a64.06328,64.06328,0,0,1-64,64H160a64.06328,64.06328,0,0,1-64-64V176a79.974,79.974,0,0,1,80-80H288V32a32,32,0,0,1,64,0V96H464A79.974,79.974,0,0,1,544,176ZM264,256a40,40,0,1,0-40,40A39.997,39.997,0,0,0,264,256Zm-8,128H192v32h64Zm96,0H288v32h64ZM456,256a40,40,0,1,0-40,40A39.997,39.997,0,0,0,456,256Zm-8,128H384v32h64ZM640,256V384a31.96166,31.96166,0,0,1-32,32H576V224h32A31.96166,31.96166,0,0,1,640,256Z"[39m
+                  [36m/>[39m
+                [36m</svg>[39m
+              [36m</div>[39m
+              [36m<div[39m
+                [33mclass[39m=[32m"message-content"[39m
+              [36m>[39m
+                [0mSorry, I encountered an error. Please verify your API key.[0m
+              [36m</div>[39m
+            [36m</div>[39m
+            [36m<div[39m
+              [33maria-live[39m=[32m"assertive"[39m
+              [33mclass[39m=[32m"error-message"[39m
+              [33mrole[39m=[32m"alert"[39m
+            [36m>[39m
+              [0mFailed to get a response. Please check your API key and try again.[0m
+            [36m</div>[39m
+            [36m<div[39m
+              [33maria-hidden[39m=[32m"true"[39m
+            [36m/>[39m
+          [36m</div>[39m
+          [36m<form[39m
+            [33maria-label[39m=[32m"Send a message"[39m
+            [33mclass[39m=[32m"chat-input-form"[39m
+          [36m>[39m
+            [36m<label[39m
+              [33mclass[39m=[32m"sr-only"[39m
+              [33mfor[39m=[32m"chat-input"[39m
+            [36m>[39m
+              [0mType your question about the election process[0m
+            [36m</label>[39m
+            [36m<input[39m
+              [33maria-label[39m=[32m"Type your question"[39m
+              [33mautocomplete[39m=[32m"off"[39m
+              [33mclass[39m=[32m"chat-input"[39m
+              [33mid[39m=[32m"chat-input"[39m
+              [33mmaxlength[39m=[32m"1000"[39m
+              [33mplaceholder[39m=[32m"Ask about voter registration, polling places, ballots…"[39m
+              [33mtype[39m=[32m"text"[39m
+              [33mvalue[39m=[32m""[39m
+            [36m/>[39m
+            [36m<button[39m
+              [33maria-label[39m=[32m"Send message"[39m
+              [33mclass[39m=[32m"btn-primary send-btn"[39m
+              [33mdisabled[39m=[32m""[39m
+              [33mtype[39m=[32m"submit"[39m
+            [36m>[39m
+              [36m<svg[39m
+                [33maria-hidden[39m=[32m"true"[39m
+                [33mfill[39m=[32m"currentColor"[39m
+                [33mheight[39m=[32m"1em"[39m
+                [33mstroke[39m=[32m"currentColor"[39m
+                [33mstroke-width[39m=[32m"0"[39m
+                [33mviewBox[39m=[32m"0 0 512 512"[39m
+                [33mwidth[39m=[32m"1em"[39m
+                [33mxmlns[39m=[32m"http://www.w3.org/2000/svg"[39m
+              [36m>[39m
+                [36m<path[39m
+                  [33md[39m=[32m"M476 3.2L12.5 270.6c-18.1 10.4-15.8 35.6 2.2 43.2L121 358.4l287.3-253.2c5.5-4.9 13.3 2.6 8.6 8.3L176 407v80.5c0 23.6 28.5 32.9 42.5 15.8L282 426l124.6 52.2c14.2 6 30.4-2.9 33-18.2l72-432C515 7.8 493.3-6.8 476 3.2z"[39m
+                [36m/>[39m
+              [36m</svg>[39m
+            [36m</button>[39m
+          [36m</form>[39m
+        [36m</div>[39m
+      [36m</main>[39m
+    [36m</div>[39m
+  [36m</body>[39m
+[36m</html>[39m
+[90m [2m❯[22m Proxy.waitForWrapper node_modules/@testing-library/dom/dist/wait-for.js:[2m163:27[22m[39m
+[36m [2m❯[22m src/pages/Assistant.test.jsx:[2m121:11[22m[39m
+    [90m119|[39m
+    [90m120|[39m     [90m// Wait for response to appear[39m
+    [90m121|[39m     [35mawait[39m [34mwaitFor[39m(() [33m=>[39m {
+    [90m   |[39m           [31m^[39m
+    [90m122|[39m       expect(screen.getByText(/Voter registration is the process of si…
+    [90m123|[39m     })[33m;[39m
+
+[31m[2m⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/1]⎯[22m[39m
+
+
+[2m Test Files [22m [1m[31m1 failed[39m[22m[90m (1)[39m
+[2m      Tests [22m [1m[31m1 failed[39m[22m[2m | [22m[1m[32m13 passed[39m[22m[90m (14)[39m
+[2m   Start at [22m 23:21:16
+[2m   Duration [22m 2.48s[2m (transform 74ms, setup 76ms, import 307ms, tests 1.26s, environment 710ms)[22m
+
