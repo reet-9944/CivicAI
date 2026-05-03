@@ -11,6 +11,7 @@ class ErrorBoundary extends Component {
     return { hasError: true, error };
   }
 
+  // eslint-disable-next-line no-unused-vars
   componentDidCatch(error, errorInfo) {
     // Suppressed for production code quality: console.error('ErrorBoundary caught an error:', error, errorInfo);
   }
